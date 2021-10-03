@@ -1,0 +1,38 @@
+#!/bin/bash
+##################################################
+#
+#	Author	: Viki ( @ ) Vignesh Natarajan		
+#	Contact	: vikiworks.io
+#
+##################################################
+
+#mysqladmin -u root password <NEWPASSWORD>
+#mysqladmin -u root password "mysqltest123"
+
+uninstall_mysql(){
+	echo "[ status ] uninstalling old version of mysql"
+	apt-get remove -y --purge mysql* 2> /dev/null 1> /dev/null 
+	apt-get purge -y mysql*				2> /dev/null 1> /dev/null 
+	apt-get -y autoremove.				2> /dev/null 1> /dev/null 
+	apt-get -y autoremove				2> /dev/null 1> /dev/null 
+	apt-get -y autoclean				2> /dev/null 1> /dev/null 
+	apt-get  remove -y dbconfig-mysql	2> /dev/null 1> /dev/null 
+	#apt-get -y dist-upgrade			2> /dev/null 1> /dev/null 
+	rm -r /var/lib/mysql				2> /dev/null 1> /dev/null 
+}
+
+uninstall_mysql
+
+apt install -y mysql-server
+
+if [ $? -eq 0 ]; then
+	echo " [ status ] mysql-server installation successful"
+	echo 
+	echo "default password for "root" is root"
+else	
+	echo " [ failure ] mysql-server installation failed"
+fi
+
+#service mysql stop
+#service mysql start
+#mysql_secure_installation
