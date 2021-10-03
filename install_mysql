@@ -28,7 +28,8 @@ apt install -y mysql-server
 if [ $? -eq 0 ]; then
 	echo " [ status ] mysql-server installation successful"
 	echo 
-	echo "default password for "root" is root"
+        echo "set root password"
+	mysqladmin -u root password
 else	
 	echo " [ failure ] mysql-server installation failed"
 fi
